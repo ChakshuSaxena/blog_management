@@ -1,7 +1,16 @@
 class BlogPostsController < ApplicationController
-  def index
-    @posts = BlogPost.order(created_at: :desc)
 
+  def index
+    access_key = '2oD7ETB5EsN69WCDoYyFMZIgaMQoViR07wMXxAfMwTg'
+    @unsplash_service = UnsplashService.new(access_key)
+
+    @posts = BlogPost.order(created_at: :desc)
+    @post_images = {}
+
+    @posts.each do |post|
+      images = @unsplash_service.search_photos(post.title)
+      @post_images[post.id] = images.first unless images.empty?
+    end
   end
 
   def new

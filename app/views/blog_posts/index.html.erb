@@ -1,9 +1,10 @@
 <div style="padding: 20px; margin-bottom: 10px;">
-  <h2 style="display: inline;">Blog Posts</h3>
+  <h2 style="display: inline;">Blog Posts</h2>
   <div class="create-post-btn">
     <%= link_to "New Post", new_blog_post_path, style: "text-decoration: none; color: black;" %>
   </div>
 </div>
+
 <table>
   <thead>
     <tr>
@@ -16,17 +17,27 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
+        <td>
+          <div class="post-details">
+            <div class="images">
+              <% if @post_images[post.id].present? %>
+                <%= image_tag(@post_images[post.id]["urls"]["regular"], size: "150x150") %>
+              <% else %>
+                <p>-</p>
+              <% end %>
+            </div>
+            <div class="post-title"><%= post.title %></div>
+          </div>
+        </td>
         <td><%= post.user.email %></td>
         <td><%= post.content %></td>
         <td>
           <%= link_to edit_blog_post_path(post), class: "edit-icon" do %>
             <span class="edit-icon" aria-hidden="true">&#9998;</span>
           <% end %>
-          <%= link_to blog_post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" }, class: "delete-icon" do %>
+          <%= link_to blog_post_path(post), method: :delete, onclick: "confirmDelete(#{post.id})", class: "delete-icon" do %>
             <span class="delete-icon" aria-hidden="true">&#128465;</span>
           <% end %>
-
         </td>
       </tr>
     <% end %>
@@ -66,14 +77,29 @@
   .create-post-btn:hover {
     background-color: #0056b3;
   }
+
+  .post-details {
+    display: flex;
+    align-items: center;
+  }
+
+  .post-title {
+    font-weight: bold;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .images {
+    width: 50px; /* Set width of image container */
+  }
+
+  .images img {
+    max-width: 100%;
+    height: 50px;
+  }
 </style>
 
 <script>
-  function editUser(postId) {
-
-    console.log("Editing user with ID:", postId);
-  }
-
   function confirmDelete(postId) {
     if (confirm("Are you sure you want to delete this post?")) {
       window.location.href = "/blog_posts";
