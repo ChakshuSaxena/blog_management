@@ -1,0 +1,46 @@
+<%= form_for @blog_post, html: { class: "simple-form" } do |f| %>
+  <div class="simple-form-container">
+    <h2 class="form-title">Edit Post</h2>
+    <div class="form-group">
+      <%= f.label :title, "Title*" %>
+      <%= f.text_field :title, class: "form-control", style: "width: 100%;" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content, "Content*" %>
+      <%= f.text_field :content, class: "form-control", style: "width: 100%;" %>
+    </div>
+    <div class="form-actions">
+      <%= f.submit "Save", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<style type="text/css">
+  .simple-form {
+    width: 50%; /* Adjust as needed */
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+
+  .form-title {
+    padding: 20px 0;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .form-actions {
+    text-align: center;
+    margin-top: 20px;
+  }
+</style>

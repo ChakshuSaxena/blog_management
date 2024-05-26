@@ -1,0 +1,82 @@
+<div style="padding: 20px; margin-bottom: 10px;">
+  <h2 style="display: inline;">Blog Posts</h3>
+  <div class="create-post-btn">
+    <%= link_to "New Post", new_blog_post_path, style: "text-decoration: none; color: black;" %>
+  </div>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Content</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.user.email %></td>
+        <td><%= post.content %></td>
+        <td>
+          <%= link_to edit_blog_post_path(post), class: "edit-icon" do %>
+            <span class="edit-icon" aria-hidden="true">&#9998;</span>
+          <% end %>
+          <%= link_to blog_post_path(post), method: :delete, data: { confirm: "Are you sure you want to delete this post?" }, class: "delete-icon" do %>
+            <span class="delete-icon" aria-hidden="true">&#128465;</span>
+          <% end %>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2; /* Add background color to header cells */
+  }
+  .edit-icon, .delete-icon {
+    cursor: pointer;
+    text-decoration: none
+  }
+
+  .create-post-btn {
+    float: right;
+    background-color: #e0e0e0;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .create-post-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<script>
+  function editUser(postId) {
+
+    console.log("Editing user with ID:", postId);
+  }
+
+  function confirmDelete(postId) {
+    if (confirm("Are you sure you want to delete this post?")) {
+      window.location.href = "/blog_posts";
+    }
+  }
+</script>
