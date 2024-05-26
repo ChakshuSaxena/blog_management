@@ -1,8 +1,11 @@
 <div style="padding: 20px; margin-bottom: 10px;">
   <h2 style="display: inline;">Blog Posts</h2>
-  <div class="create-post-btn">
-    <%= link_to "New Post", new_blog_post_path, style: "text-decoration: none; color: black;" %>
-  </div>
+
+  <div class="create-post-btn" style="
+    margin-left: 15px;"><%= link_to "New Post", new_blog_post_path, style: "text-decoration: none; color: black;"%></div>
+  <% if current_user.present? %>
+    <div class="create-post-btn"><%= link_to "Sign out", destroy_user_session_path, method: :delete, style: "text-decoration: none; color: black;"%></div>
+  <%end%>
 </div>
 
 <table>

@@ -1,11 +1,29 @@
 <h1>Welcome to Your Blog Application</h1>
 <% if user_signed_in? %>
-  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+  <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "home_page_btn"%>
 <% else %>
-  <%= link_to "Sign in", new_user_session_path %>
-  <%= link_to "Sign up", new_user_registration_path %>
+  <%= link_to "Sign in", new_user_session_path, class: "home_page_btn"%>
+  <%= link_to "Sign up", new_user_registration_path , class: "home_page_btn"%>
 <% end %>
-<div>
-  <%= link_to "View Blog Post", blog_posts_path %>
-</div>
+<% if user_signed_in? %>
+  <div style=" margin-top: 25px;">
+    <%= link_to "View Blog Post", blog_posts_path , class: "home_page_btn"%>
+  </div>
+<%end%>
 
+
+<style type="text/css">
+   .home_page_btn {
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .home_page_btn:hover {
+    background-color: #0056b3;
+  }
+</style>
